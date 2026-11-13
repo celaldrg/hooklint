@@ -1,0 +1,16 @@
+[package]
+name = "hooklint"
+version = "0.1.0"
+edition = "2021"
+description = "Lint Claude Code hooks (settings.json, plugin hooks.json) before they silently fail: unknown events, dead matchers, missing scripts, exit-1 guards that never block"
+license = "MIT"
+repository = "https://github.com/celaldrg/hooklint"
+readme = "README.md"
+keywords = ["claude-code", "hooks", "linter", "ai-agents", "cli"]
+categories = ["command-line-utilities", "development-tools"]
+
+[dependencies]
+
+[profile.release]
+strip = true
+lto = true
