@@ -1,6 +1,18 @@
-# hooklint
+<p align="center">
+  <img src="assets/banner.webp" alt="hooklint: lint Claude Code hooks before they silently fail" width="100%">
+</p>
 
-**Lint Claude Code hooks before they silently fail.**
+<h3 align="center">Lint Claude Code hooks before they silently fail.</h3>
+
+<p align="center">
+  <a href="https://github.com/celaldrg/hooklint/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/celaldrg/hooklint/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/celaldrg/hooklint/releases"><img alt="Release" src="https://img.shields.io/github/v/release/celaldrg/hooklint?sort=semver"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+  <img alt="Rust" src="https://img.shields.io/badge/rust-stable-orange">
+  <img alt="Dependencies: 0" src="https://img.shields.io/badge/dependencies-0-brightgreen">
+</p>
+
+## Why
 
 Claude Code hooks are shell commands, HTTP calls, MCP tools and prompts that run on events such as `PreToolUse`, `PostToolUse` and `SessionStart`. They are a favourite place to put guardrails: block `rm -rf`, keep secrets out of edits, format on save.
 
@@ -12,6 +24,11 @@ The trouble is that most hook mistakes produce **no error at all**. A matcher wr
 - Checks the configuration against the current hooks reference: 33 events, 5 handler types, matcher rules per event.
 - Opens the scripts your hooks point to: missing files, missing `chmod +x`, and `PreToolUse` guards that never exit 2.
 - `--json` for CI and editors, `--strict` to fail on warnings.
+
+<p align="center">
+  <img src="assets/terminal-broken.webp" alt="hooklint examples/broken, real output" width="860">
+  <br><sub>Real output: <code>hooklint examples/broken</code>. Every hook in that file looks plausible.</sub>
+</p>
 
 ## Install
 
@@ -43,6 +60,11 @@ Exit codes: `0` clean, `1` problems found, `2` usage or read error.
 ## Example
 
 [`examples/broken`](examples/broken/.claude/settings.json) is a realistic project settings file. Every hook in it looks plausible:
+
+<p align="center">
+  <img src="assets/demo.gif" alt="hooklint on a clean and a broken project" width="860">
+  <br><sub>Recorded with <a href="https://github.com/charmbracelet/vhs">vhs</a>: <code>hooklint examples/clean</code>, then <code>hooklint --quiet examples/broken</code>.</sub>
+</p>
 
 ```text
 $ hooklint examples/broken
